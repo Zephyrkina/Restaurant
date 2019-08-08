@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.DoubleUnaryOperator;
 
+
 @Data
 public class ExtraRepository {
     private Map<String, DoubleUnaryOperator> extras;

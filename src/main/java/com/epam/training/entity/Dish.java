@@ -2,21 +2,16 @@ package com.epam.training.entity;
 
 import lombok.*;
 
+import java.util.function.DoubleUnaryOperator;
+
 @Data
 @AllArgsConstructor
 public class Dish implements Food {
     private String dishName;
-    private String clientName;
+    private DoubleUnaryOperator bonus;
 
     @Override
-    public String getFoodName() {
-        return dishName;
-    }
-
-
-
-   /* @Override
     public Double getBonusHappiness(Double currentHappiness) {
-        return dishType.getBonus().applyAsDouble(currentHappiness);
-    }*/
+        return bonus.applyAsDouble(currentHappiness);
+    }
 }

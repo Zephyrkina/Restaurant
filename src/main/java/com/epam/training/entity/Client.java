@@ -2,7 +2,6 @@ package com.epam.training.entity;
 
 
 import com.epam.training.pattern.OrderObserver;
-import com.epam.training.service.HappinessCalculator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +15,14 @@ public class Client implements OrderObserver{
 
     public void increaseHappiness(Double happiness) {
         this.happiness += happiness;
+        log.info("{} happiness is {} now", name, happiness);
     }
-
 
     @Override
     public void update(Order order) {
-        Double newHappiness = HappinessCalculator.calculateHappiness(this.happiness, order.getDish());
-        increaseHappiness(newHappiness);
+        if (order.getClientName().equals(this.name)) {
+            Double newHappiness = order.getDish().getBonusHappiness(this.happiness);
+            increaseHappiness(newHappiness);
+        }
     }
 }
