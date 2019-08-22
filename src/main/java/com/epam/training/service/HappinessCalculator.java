@@ -1,26 +1,28 @@
 package com.epam.training.service;
 
 import com.epam.training.entity.Dish;
-import com.epam.training.entity.ExtraDecorator;
 import com.epam.training.entity.Food;
 import com.epam.training.repository.DishRepository;
 import com.epam.training.repository.ExtraRepository;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
 public class HappinessCalculator {
-    private DishRepository dishRepository;
-    private ExtraRepository extraRepository;
+    private FoodService dishService;
 
     public HappinessCalculator() {
-        dishRepository = new DishRepository();
-        extraRepository = new ExtraRepository();
+        dishService = new DishService();
     }
 
-    public  Double calculateHappiness(Double currentHappiness, Food food) {
-        Double newHappiness = dishRepository.getDishes().get(((Dish)food).getDishName()).applyAsDouble(currentHappiness);
-
-        if (food instanceof ExtraDecorator) {
-            newHappiness = extraRepository.getExtras().get(((ExtraDecorator)food).getExtra().getFoodName()).applyAsDouble(newHappiness);
+    public Double calculateHappiness(Food dish, Double currentHappiness ) {
+        if (((Dish)dish).getExtra() != null ) {
+             dishService = new ExtraService(dishService);
         }
+
+        Double newHappiness = dishService.getBonusHappiness(dish, currentHappiness);
 
         return newHappiness;
     }

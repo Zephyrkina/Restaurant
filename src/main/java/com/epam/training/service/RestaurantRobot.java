@@ -1,33 +1,41 @@
 package com.epam.training.service;
 
 import com.epam.training.entity.Dish;
-import com.epam.training.entity.ExtraDecorator;
+import com.epam.training.entity.Extra;
 import com.epam.training.entity.Food;
 import com.epam.training.entity.Order;
 import com.epam.training.pattern.DishFactory;
 import com.epam.training.pattern.ExtraFactory;
 import com.epam.training.pattern.Factory;
 import com.epam.training.pattern.OrderObserver;
+import com.epam.training.repository.DishRepository;
+import com.epam.training.repository.ExtraRepository;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;
 
 @Slf4j
+@AllArgsConstructor
 public class RestaurantRobot {
 
     private Factory dishFactory;
 
     private Factory extraFactory;
 
-    private List<OrderObserver> orderObservers;
+    private ClientService clientService;
 
-    public RestaurantRobot() {
-        orderObservers = new ArrayList<>();
+    private OrderQueueService ordersQueue;
+
+    public RestaurantRobot(ClientService clientService) {
         dishFactory = new DishFactory();
         extraFactory = new ExtraFactory();
+        ordersQueue = OrderQueueService.getInstance();
+        this.clientService = clientService;
     }
 
-    public void startProcessingOrders(OrderQueueService ordersQueue) {
+    public void startProcessingOrders() {
 
         while (true) {
             if (ordersQueue.isEmpty()) {
@@ -36,16 +44,17 @@ public class RestaurantRobot {
                 Order order = ordersQueue.getOrder();
                 Food orderedDish = dishFactory.createFood(order.getDishName());
 
-                if (!order.getExtraName().isEmpty()) {
-                    Food orderedExtra = extraFactory.createFood(order.getExtraName());
-                    orderedDish = new ExtraDecorator(orderedDish, orderedExtra);
+                if (order.getExtraName() != null && !order.getExtraName().isEmpty()) {
+                    Extra orderedExtra = (Extra)extraFactory.createFood(order.getExtraName());
+                    ((Dish)orderedDish).setExtra(orderedExtra);
+
                 }
 
                 order.setDish(orderedDish);
 
-                notifyObservers(order);
+                clientService.update(order);
 
-                log.info("Robot has prepared: {} (extra: {}) for ..", order.getDishName(),  order.getExtraName() != null ? order.getExtraName() : " - " );
+                log.info("Robot has prepared: {} (extra: {}) for {}", order.getDishName(),  order.getExtraName() != null ? order.getExtraName() : " - ", order.getClientName() );
 
             }
 
@@ -58,17 +67,4 @@ public class RestaurantRobot {
         }
     }
 
-    public void addObserver(OrderObserver orderObserver) {
-        orderObservers.add(orderObserver);
-    }
-
-    public void removeObserver(OrderObserver orderObserver) {
-        orderObservers.remove(orderObserver);
-    }
-
-    public void notifyObservers(Order order) {
-        for (OrderObserver o : orderObservers) {
-            o.update(order);
-        }
-    }
 }

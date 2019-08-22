@@ -1,28 +1,34 @@
 package com.epam.training.service;
 
 import com.epam.training.entity.Order;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class OrderService {
 
-    public Order orderDish(DishType dishType) {
+    private OrderQueueService ordersQueue;
 
-        Order o = restaurant.orderDIsh(bob.getName(), burger);
+    public OrderService() {
+        ordersQueue = OrderQueueService.getInstance();
+    }
 
+    public Order orderDish(String clientName, String foodName) {
         Order order = new Order();
-        order.setClient(this);
-        order.setDishType(dishType);
-        orderQueue.addOrderToQueue(order);
-        log.info("Client ordered food: " + dishType.getName());
+        order.setClientName(clientName);
+        order.setDishName(foodName);
+        log.info("Client {} ordered food: {}", clientName, foodName);
+        ordersQueue.addOrderToQueue(order);
         return order;
     }
 
-    public Order orderDish(FoodType dishType, FoodType extraType) {
+    public Order orderDish(String clientName, String foodName, String extraName) {
+
         Order order = new Order();
-        order.setClient(this);
-        order.setDishType(dishType);
-        order.setExtraType(extraType);
-        orderQueue.addOrderToQueue(order);
-        log.info("Client " + this.name + " ordered food: " + dishType.getName() + ", extra: " + extraType.getName() );
+        order.setClientName(clientName);
+        order.setDishName(foodName);
+        order.setExtraName(extraName);
+        log.info("Client {} ordered food: {}, extra: {} " , clientName, foodName, extraName);
+        ordersQueue.addOrderToQueue(order);
         return order;
     }
 }

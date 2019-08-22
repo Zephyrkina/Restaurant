@@ -5,18 +5,10 @@ import lombok.*;
 @Data
 @AllArgsConstructor
 public class Dish implements Food {
-    private String dishName;
-    private String clientName;
+    private String name;
+    private Extra extra;
 
-    @Override
-    public String getFoodName() {
-        return dishName;
+    public Dish(String name) {
+        this.name = name;
     }
-
-
-
-   /* @Override
-    public Double getBonusHappiness(Double currentHappiness) {
-        return dishType.getBonus().applyAsDouble(currentHappiness);
-    }*/
 }

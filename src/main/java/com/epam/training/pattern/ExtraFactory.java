@@ -6,7 +6,7 @@ import com.epam.training.entity.Food;
 public class ExtraFactory implements Factory{
 
     @Override
-    public Food createFood(FoodType foodType) {
-        return new Extra(foodType);
+    public Food createFood(String foodName) {
+        return new Extra(foodName);
     }
 }

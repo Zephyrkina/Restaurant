@@ -32,10 +32,6 @@ public class OrderQueueService {
 
     }
 
- /*   public void removeOrderFromQueue() {
-        orders.remove();
-    }*/
-
     public boolean isEmpty() {
         return orders.isEmpty();
     }
