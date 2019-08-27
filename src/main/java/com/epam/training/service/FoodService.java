@@ -1,7 +1,7 @@
 package com.epam.training.service;
 
-import com.epam.training.entity.Food;
+import com.epam.training.entity.Dish;
 
 public interface FoodService {
-    Double getBonusHappiness(Food food, Double currentHappiness);
+    Double getBonusHappiness(Dish dish, Double currentHappiness);
 }

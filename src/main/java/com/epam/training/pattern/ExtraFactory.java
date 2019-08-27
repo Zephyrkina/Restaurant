@@ -1,12 +1,10 @@
 package com.epam.training.pattern;
 
 import com.epam.training.entity.Extra;
-import com.epam.training.entity.Food;
 
-public class ExtraFactory implements Factory{
+public class ExtraFactory{
 
-    @Override
-    public Food createFood(String foodName) {
-        return new Extra(foodName);
+    public Extra create(String extraName) {
+        return new Extra(extraName);
     }
 }

@@ -1,6 +1,7 @@
 package com.epam.training.service;
 
 import com.epam.training.entity.Client;
+import com.epam.training.entity.Dish;
 import com.epam.training.entity.Order;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,16 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-@AllArgsConstructor
 @Slf4j
 public class ClientService {
     private List<Client> clients;
     private HappinessCalculator happinessCalculator;
-
-    public ClientService(HappinessCalculator happinessCalculator) {
-        clients = new ArrayList<>();
-        this.happinessCalculator = happinessCalculator;
-    }
 
     public ClientService() {
         clients = new ArrayList<>();
@@ -32,16 +27,20 @@ public class ClientService {
 
     public void removeClient(Client client) {
         clients.remove(client);
-
     }
 
-    public void update(Order order) {
+    public void update(Dish dish) {
         for (Client client : clients) {
-            if (client.getName().equals(order.getClientName())){
-                Double happinessBeforeFood = client.getHappiness();
-                Double currentHappiness = happinessCalculator.calculateHappiness(order.getDish(), happinessBeforeFood);
-                log.info("Client " + order.getClientName() + " ate dish, current happines is " + currentHappiness);
+            if (client.getName().equals(dish.getClientName())){
+                clientConsumesDish(client, dish);
             }
         }
+    }
+
+    private void clientConsumesDish(Client client, Dish dish) {
+        Double happinessBeforeFood = client.getHappiness();
+        Double currentHappiness = happinessCalculator.calculateHappiness(dish, happinessBeforeFood);
+        client.setHappiness(currentHappiness);
+        log.info("Client " + client.getName() + " ate dish, current happiness is " + client.getHappiness());
     }
 }

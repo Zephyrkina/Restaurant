@@ -4,6 +4,6 @@ import lombok.*;
 
 @Data
 @AllArgsConstructor
-public class Extra implements Food {
+public class Extra{
     private String name;
 }

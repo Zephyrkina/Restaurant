@@ -1,8 +1,8 @@
 package com.epam.training;
 
 import com.epam.training.entity.*;
+import com.epam.training.pattern.OrderBuilder;
 import com.epam.training.service.ClientService;
-import com.epam.training.service.OrderQueueService;
 import com.epam.training.service.OrderService;
 import com.epam.training.service.RestaurantRobot;
 
@@ -26,9 +26,39 @@ public class App {
 
         robotThread.start();
 
-        Order order1 = orderService.orderDish(client1.getName(), "hotdog");
+        Order order1 = new OrderBuilder()
+                .setClientName(client1.getName())
+                .setDishName("hotdog")
+                .build();
+
+        Order order2 = new OrderBuilder()
+                .setClientName(client2.getName())
+                .setDishName("chips")
+                .setExtraName("mustard")
+                .build();
+
+
+        Order order3 = new OrderBuilder()
+                .setClientName(client3.getName())
+                .setDishName("hotdog")
+                .setExtraName("ketchup")
+                .build();
+
+
+      /*  Order order1 = new Order(client1.getName(), "hotdog");
+        Order order2 = new Order(client2.getName(), "chips", "mustard");
+        Order order3 = new Order(client3.getName(), "hotdog", "mustard");*/
+
+        orderService.orderDish(order1);
+        orderService.orderDish(order2);
+        orderService.orderDish(order3);
+
+        /*Order order1 = orderService.orderDish(client1.getName(), "hotdog");
         Order order2 = orderService.orderDish(client2.getName(),  "chips", "mustard");
-        Order order3 = orderService.orderDish(client3.getName(), "hotdog", "mustard");
+        Order order3 = orderService.orderDish(client3.getName(), "hotdog", "mustard");*/
+
+
+
     }
 
 

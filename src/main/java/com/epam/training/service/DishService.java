@@ -1,11 +1,10 @@
 package com.epam.training.service;
 
-import com.epam.training.entity.Food;
+import com.epam.training.entity.Dish;
 import com.epam.training.repository.DishRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@AllArgsConstructor
 @Data
 public class DishService implements FoodService{
     private DishRepository dishRepository;
@@ -14,11 +13,7 @@ public class DishService implements FoodService{
         dishRepository = new DishRepository();
     }
 
-    public Double getBonusHappiness(Food dish, Double currentHappiness) {
-        Double newHappiness = dishRepository.getDishes().get(dish.getName()).applyAsDouble(currentHappiness);
-        return newHappiness;
-
+    public Double getBonusHappiness(Dish dish, Double currentHappiness) {
+        return dishRepository.getDishes().get(dish.getName()).applyAsDouble(currentHappiness);
     }
-
-
 }

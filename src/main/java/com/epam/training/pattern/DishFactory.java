@@ -1,12 +1,10 @@
 package com.epam.training.pattern;
 
 import com.epam.training.entity.Dish;
-import com.epam.training.entity.Food;
 
-public class DishFactory implements Factory {
+public class DishFactory {
 
-    @Override
-    public Food createFood(String dishName) {
-        return new Dish(dishName);
+    public Dish create(String dishName, String clientName) {
+        return new Dish(dishName, clientName);
     }
 }

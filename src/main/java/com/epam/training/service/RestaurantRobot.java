@@ -2,69 +2,52 @@ package com.epam.training.service;
 
 import com.epam.training.entity.Dish;
 import com.epam.training.entity.Extra;
-import com.epam.training.entity.Food;
 import com.epam.training.entity.Order;
 import com.epam.training.pattern.DishFactory;
 import com.epam.training.pattern.ExtraFactory;
-import com.epam.training.pattern.Factory;
-import com.epam.training.pattern.OrderObserver;
-import com.epam.training.repository.DishRepository;
-import com.epam.training.repository.ExtraRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
-
 @Slf4j
-@AllArgsConstructor
 public class RestaurantRobot {
 
-    private Factory dishFactory;
+    private DishFactory dishFactory;
 
-    private Factory extraFactory;
+    private ExtraFactory extraFactory;
 
     private ClientService clientService;
 
-    private OrderQueueService ordersQueue;
+    private OrderQueue ordersQueue;
 
     public RestaurantRobot(ClientService clientService) {
         dishFactory = new DishFactory();
         extraFactory = new ExtraFactory();
-        ordersQueue = OrderQueueService.getInstance();
+        ordersQueue = OrderQueue.getInstance();
         this.clientService = clientService;
     }
 
     public void startProcessingOrders() {
 
         while (true) {
-            if (ordersQueue.isEmpty()) {
-                continue;
-            } else {
+            if (!ordersQueue.isEmpty()) {
                 Order order = ordersQueue.getOrder();
-                Food orderedDish = dishFactory.createFood(order.getDishName());
+                Dish orderedDish = dishFactory.create(order.getDishName(), order.getClientName());
 
                 if (order.getExtraName() != null && !order.getExtraName().isEmpty()) {
-                    Extra orderedExtra = (Extra)extraFactory.createFood(order.getExtraName());
-                    ((Dish)orderedDish).setExtra(orderedExtra);
-
+                    Extra orderedExtra = extraFactory.create(order.getExtraName());
+                    orderedDish.setExtra(orderedExtra);
                 }
 
-                order.setDish(orderedDish);
+                log.info("Robot has prepared: {} (extra: {}) for {}", orderedDish.getName(), orderedDish.getExtra() != null ? orderedDish.getExtra().getName() : " - ", orderedDish.getClientName());
 
-                clientService.update(order);
-
-                log.info("Robot has prepared: {} (extra: {}) for {}", order.getDishName(),  order.getExtraName() != null ? order.getExtraName() : " - ", order.getClientName() );
-
+                clientService.update(orderedDish);
             }
-
-
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+
         }
     }
-
 }
