@@ -2,9 +2,6 @@ package com.epam.training.service;
 
 import com.epam.training.entity.Client;
 import com.epam.training.entity.Dish;
-import com.epam.training.entity.Order;
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;

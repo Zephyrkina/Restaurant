@@ -5,7 +5,6 @@ import com.epam.training.entity.Extra;
 import com.epam.training.entity.Order;
 import com.epam.training.pattern.DishFactory;
 import com.epam.training.pattern.ExtraFactory;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -38,7 +37,7 @@ public class RestaurantRobot {
                     orderedDish.setExtra(orderedExtra);
                 }
 
-                log.info("Robot has prepared: {} (extra: {}) for {}", orderedDish.getName(), orderedDish.getExtra() != null ? orderedDish.getExtra().getName() : " - ", orderedDish.getClientName());
+                log.info("Robot has prepared: {} (extra: {}) for {}", orderedDish.getDishName(), orderedDish.getExtra() != null ? orderedDish.getExtra().getName() : " - ", orderedDish.getClientName());
 
                 clientService.update(orderedDish);
             }
