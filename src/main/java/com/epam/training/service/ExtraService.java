@@ -6,7 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 public class ExtraService implements FoodService {
     private FoodService dishService;
     private ExtraRepository extraRepository;

@@ -5,7 +5,6 @@ import com.epam.training.repository.DishRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
 public class DishService implements FoodService{
     private DishRepository dishRepository;
 

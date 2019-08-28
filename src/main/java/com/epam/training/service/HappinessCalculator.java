@@ -4,8 +4,6 @@ import com.epam.training.entity.Dish;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
-@Data
-@AllArgsConstructor
 public class HappinessCalculator {
     private FoodService dishService;
 
