@@ -1,7 +1,7 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Client;
-import com.epam.training.entity.Dish;
+import com.training.entity.Client;
+import com.training.entity.Dish;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -27,16 +27,12 @@ public class ClientService {
 
     public void update(Dish dish) {
         for (Client client : clients) {
-            if (client.getName().equals(dish.getClientName())){
-                clientConsumesDish(client, dish);
+            if (client.getName().equals(dish.getClientName())) {
+                Double currentHappiness = happinessCalculator.calculateHappiness(dish, client.getHappiness());
+                client.setHappiness(currentHappiness);
+                log.info("Client {} ate dish, current happiness is {}", client.getName(), client.getHappiness());
             }
         }
     }
 
-    private void clientConsumesDish(Client client, Dish dish) {
-        Double happinessBeforeFood = client.getHappiness();
-        Double currentHappiness = happinessCalculator.calculateHappiness(dish, happinessBeforeFood);
-        client.setHappiness(currentHappiness);
-        log.info("Client " + client.getName() + " ate dish, current happiness is " + client.getHappiness());
-    }
 }

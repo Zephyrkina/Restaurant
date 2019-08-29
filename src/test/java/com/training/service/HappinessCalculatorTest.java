@@ -1,9 +1,8 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Dish;
-import com.epam.training.entity.Extra;
+import com.training.entity.Dish;
+import com.training.entity.Extra;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -23,9 +22,8 @@ public class HappinessCalculatorTest {
     @Test
     public void testHappinessCalculator_whenDishWithoutExtra() {
         Double expectedHappiness = 2.0;
-        Double actualHappiness;
 
-        actualHappiness = happinessCalculator.calculateHappiness(dish, 0.0);
+        Double actualHappiness = happinessCalculator.calculateHappiness(dish, 0.0);
 
         assertEquals(expectedHappiness, actualHappiness);
     }
@@ -35,9 +33,8 @@ public class HappinessCalculatorTest {
         Extra extra = new Extra("mustard");
         dish.setExtra(extra);
         Double expectedHappiness = 1.0;
-        Double actualHappiness;
 
-        actualHappiness = happinessCalculator.calculateHappiness(dish, 0.0);
+        Double actualHappiness = happinessCalculator.calculateHappiness(dish, 0.0);
 
         assertEquals(expectedHappiness, actualHappiness);
     }

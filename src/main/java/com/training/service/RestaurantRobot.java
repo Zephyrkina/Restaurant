@@ -1,10 +1,10 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Dish;
-import com.epam.training.entity.Extra;
-import com.epam.training.entity.Order;
-import com.epam.training.pattern.DishFactory;
-import com.epam.training.pattern.ExtraFactory;
+import com.training.entity.Dish;
+import com.training.entity.Extra;
+import com.training.entity.Order;
+import com.training.pattern.DishFactory;
+import com.training.pattern.ExtraFactory;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

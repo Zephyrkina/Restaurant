@@ -1,6 +1,6 @@
-package com.epam.training.pattern;
+package com.training.pattern;
 
-import com.epam.training.entity.Extra;
+import com.training.entity.Extra;
 
 public class ExtraFactory{
 

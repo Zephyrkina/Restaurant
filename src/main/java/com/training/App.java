@@ -1,10 +1,12 @@
-package com.epam.training;
+package com.training;
 
-import com.epam.training.entity.*;
-import com.epam.training.pattern.OrderBuilder;
-import com.epam.training.service.ClientService;
-import com.epam.training.service.OrderService;
-import com.epam.training.service.RestaurantRobot;
+import com.training.entity.*;
+import com.training.pattern.OrderBuilder;
+import com.training.service.ClientService;
+import com.training.service.OrderService;
+import com.training.service.RestaurantRobot;
+import com.training.entity.Client;
+import com.training.entity.Order;
 
 public class App {
 

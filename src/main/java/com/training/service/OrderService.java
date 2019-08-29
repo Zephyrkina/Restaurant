@@ -1,6 +1,6 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Order;
+import com.training.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -12,7 +12,7 @@ public class OrderService {
     }
 
     public void orderDish(Order order) {
+        ordersQueue.addOrder(order);
         log.info("Client {} ordered food: {}", order.getClientName(), order.getDishName());
-        ordersQueue.addOrderToQueue(order);
     }
 }

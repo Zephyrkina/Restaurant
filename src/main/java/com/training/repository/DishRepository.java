@@ -1,4 +1,4 @@
-package com.epam.training.repository;
+package com.training.repository;
 
 import lombok.Data;
 

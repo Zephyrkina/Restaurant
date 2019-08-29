@@ -1,7 +1,7 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Dish;
-import com.epam.training.entity.Extra;
+import com.training.entity.Dish;
+import com.training.entity.Extra;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,9 +23,8 @@ public class ExtraServiceTest {
     @Test
     public void testGetBonusHappiness_whenDishContainsExtra() {
         Double expectedHappiness = 4.0;
-        Double actualHappiness;
 
-        actualHappiness = extraService.getBonusHappiness(dish, 0.0);
+        Double actualHappiness = extraService.getBonusHappiness(dish, 0.0);
 
         assertEquals(expectedHappiness, actualHappiness);
     }

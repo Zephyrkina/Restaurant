@@ -1,7 +1,7 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Dish;
-import com.epam.training.repository.DishRepository;
+import com.training.entity.Dish;
+import com.training.repository.DishRepository;
 
 public class DishService implements FoodService{
     private DishRepository dishRepository;

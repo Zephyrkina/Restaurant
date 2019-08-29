@@ -1,6 +1,6 @@
-package com.epam.training.pattern;
+package com.training.pattern;
 
-import com.epam.training.entity.Order;
+import com.training.entity.Order;
 
 public class OrderBuilder {
     private Order order;

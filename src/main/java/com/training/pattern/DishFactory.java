@@ -1,6 +1,6 @@
-package com.epam.training.pattern;
+package com.training.pattern;
 
-import com.epam.training.entity.Dish;
+import com.training.entity.Dish;
 
 public class DishFactory {
 

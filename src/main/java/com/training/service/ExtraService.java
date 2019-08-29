@@ -1,7 +1,7 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Dish;
-import com.epam.training.repository.ExtraRepository;
+import com.training.entity.Dish;
+import com.training.repository.ExtraRepository;
 
 public class ExtraService implements FoodService {
     private FoodService dishService;
