@@ -13,16 +13,11 @@ public class Client implements OrderObserver{
     private String name;
     private Double happiness;
 
-    public void increaseHappiness(Double happiness) {
-        this.happiness += happiness;
-        log.info("{} happiness is {} now", name, happiness);
-    }
-
     @Override
-    public void update(Order order) {
-        if (order.getClientName().equals(this.name)) {
-            Double newHappiness = order.getDish().getBonusHappiness(this.happiness);
-            increaseHappiness(newHappiness);
+    public void update(String clientName, Eatable dish) {
+        if (clientName.equals(this.name)) {
+            dish.increaseClientsHappiness(this);
+            log.info("{}'s happiness after dish is {}", this.name, this.happiness);
         }
     }
 }

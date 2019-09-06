@@ -1,8 +1,9 @@
 package com.epam.training;
 
 import com.epam.training.entity.*;
-import com.epam.training.service.OrderQueueService;
-import com.epam.training.service.OrderService;
+import com.epam.training.entity.extra.ExtraType;
+import com.epam.training.entity.product.ProductType;
+import com.epam.training.service.OrderQueue;
 import com.epam.training.service.RestaurantRobot;
 
 public class App {
@@ -13,8 +14,7 @@ public class App {
         Client client3 = new Client("Joji", 0.0);
 
         RestaurantRobot robot = new RestaurantRobot();
-        OrderService orderService = new OrderService();
-
+        OrderQueue orderQueue = OrderQueue.getInstance();
 
         robot.addObserver(client1);
         robot.addObserver(client2);
@@ -24,12 +24,13 @@ public class App {
 
         robotThread.start();
 
+        Order order1 = new Order(client1, ProductType.HOT_DOG, ExtraType.UNDEFINED);
+        Order order2 = new Order(client2, ProductType.CHIPS, ExtraType.MUSTARD);
+        Order order3 = new Order(client3, ProductType.HOT_DOG, ExtraType.KETCHUP);
 
-        Order order1 = orderService.orderDish(client1.getName(), "hotdog");
-        Order order2 = orderService.orderDish(client2.getName(),  "chips", "mustard");
-        Order order3 = orderService.orderDish(client3.getName(), "hotdog", "mustard");
-
-
+        orderQueue.addOrder(order1);
+        orderQueue.addOrder(order2);
+        orderQueue.addOrder(order3);
     }
 
 

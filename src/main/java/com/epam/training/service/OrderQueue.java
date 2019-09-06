@@ -7,31 +7,29 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 @Slf4j
-public class OrderQueueService {
+public class OrderQueue {
     private Queue<Order> orders;
-    private static volatile OrderQueueService instance;
+    private static volatile OrderQueue instance;
 
-    private OrderQueueService() {
+    private OrderQueue() {
         orders = new LinkedBlockingQueue<>();
     }
 
-    public static OrderQueueService getInstance() {
+    public static OrderQueue getInstance() {
             if (instance == null) {
-                synchronized (OrderQueueService.class) {
+                synchronized (OrderQueue.class) {
                     if (instance == null) {
-                        instance = new OrderQueueService();
+                        instance = new OrderQueue();
                     }
                 }
             }
             return instance;
     }
 
-    public void addOrderToQueue(Order order) {
+    public void addOrder(Order order) {
         orders.add(order);
         log.info("Order has been added to queue: {} ", order.toString());
-
     }
-
 
     public boolean isEmpty() {
         return orders.isEmpty();
