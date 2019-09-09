@@ -8,34 +8,34 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 @Slf4j
 public class OrderQueue {
-    private Queue<Order> orderQueue;
+    private Queue<Order> orders;
     private static volatile OrderQueue instance;
 
     private OrderQueue() {
-        orderQueue = new LinkedBlockingQueue<>();
+        orders = new LinkedBlockingQueue<>();
     }
 
     public static OrderQueue getInstance() {
-        if (instance == null) {
-            synchronized (OrderQueue.class) {
-                if (instance == null) {
-                    instance = new OrderQueue();
+            if (instance == null) {
+                synchronized (OrderQueue.class) {
+                    if (instance == null) {
+                        instance = new OrderQueue();
+                    }
                 }
             }
-        }
-        return instance;
+            return instance;
     }
 
     public void addOrder(Order order) {
-        orderQueue.add(order);
+        orders.add(order);
         log.info("Order has been added to queue: {} ", order.toString());
     }
 
     public boolean isEmpty() {
-        return orderQueue.isEmpty();
+        return orders.isEmpty();
     }
 
     public Order getOrder() {
-        return orderQueue.poll();
+        return orders.poll();
     }
 }

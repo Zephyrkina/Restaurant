@@ -1,28 +1,33 @@
 package com.training.service;
 
-import com.training.entity.Dish;
-import com.training.entity.Extra;
+import com.training.entity.Eatable;
 import com.training.entity.Order;
+import com.training.entity.extra.ExtraType;
+import com.training.entity.product.ProductType;
 import com.training.pattern.DishFactory;
-import com.training.pattern.ExtraFactory;
+import com.training.pattern.OrderObserver;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.*;
 
 @Slf4j
 public class RestaurantRobot {
-
     private DishFactory dishFactory;
-
-    private ExtraFactory extraFactory;
-
-    private ClientService clientService;
-
+    private List<OrderObserver> orderObservers;
     private OrderQueue ordersQueue;
 
-    public RestaurantRobot(ClientService clientService) {
+    public RestaurantRobot() {
+        orderObservers = new ArrayList<>();
         dishFactory = new DishFactory();
-        extraFactory = new ExtraFactory();
         ordersQueue = OrderQueue.getInstance();
-        this.clientService = clientService;
+    }
+
+    public void addObserver(OrderObserver orderObserver) {
+        orderObservers.add(orderObserver);
+    }
+
+    public void removeObserver(OrderObserver orderObserver) {
+        orderObservers.remove(orderObserver);
     }
 
     public void startProcessingOrders() {
@@ -30,23 +35,26 @@ public class RestaurantRobot {
         while (true) {
             if (!ordersQueue.isEmpty()) {
                 Order order = ordersQueue.getOrder();
-                Dish orderedDish = dishFactory.create(order.getDishName(), order.getClientName());
 
-                if (order.getExtraName() != null && !order.getExtraName().isEmpty()) {
-                    Extra orderedExtra = extraFactory.create(order.getExtraName());
-                    orderedDish.setExtra(orderedExtra);
-                }
+                Eatable orderedDish = dishFactory.createDish(order.getProductType(), order.getExtraType());
 
-                log.info("Robot has prepared: {} (extra: {}) for {}", orderedDish.getDishName(), orderedDish.getExtra() != null ? orderedDish.getExtra().getName() : " - ", orderedDish.getClientName());
+                log.info("Robot has prepared: {} (extra: {}) for {}", order.getProductType(), order.getExtraType(),
+                        order.getClient().getName() );
 
-                clientService.update(orderedDish);
+                notifyObservers(order.getClient().getName(), orderedDish);
             }
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        }
+    }
 
+    private void notifyObservers(String clientName, Eatable dish) {
+        for (OrderObserver o : orderObservers) {
+            o.update(clientName, dish);
         }
     }
 }
