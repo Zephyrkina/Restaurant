@@ -1,6 +1,6 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Order;
+import com.training.entity.Order;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.Queue;

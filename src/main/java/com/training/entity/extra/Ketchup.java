@@ -1,7 +1,7 @@
-package com.epam.training.entity.extra;
+package com.training.entity.extra;
 
-import com.epam.training.entity.Client;
-import com.epam.training.entity.Eatable;
+import com.training.entity.Client;
+import com.training.entity.Eatable;
 
 public class Ketchup extends Extra {
 

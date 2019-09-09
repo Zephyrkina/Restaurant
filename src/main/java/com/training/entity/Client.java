@@ -1,7 +1,7 @@
-package com.epam.training.entity;
+package com.training.entity;
 
 
-import com.epam.training.pattern.OrderObserver;
+import com.training.pattern.OrderObserver;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

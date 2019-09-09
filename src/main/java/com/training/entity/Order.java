@@ -1,7 +1,7 @@
-package com.epam.training.entity;
+package com.training.entity;
 
-import com.epam.training.entity.extra.ExtraType;
-import com.epam.training.entity.product.ProductType;
+import com.training.entity.extra.ExtraType;
+import com.training.entity.product.ProductType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

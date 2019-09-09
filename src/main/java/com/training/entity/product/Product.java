@@ -1,6 +1,6 @@
-package com.epam.training.entity.product;
+package com.training.entity.product;
 
-import com.epam.training.entity.Eatable;
+import com.training.entity.Eatable;
 import lombok.*;
 
 @Data

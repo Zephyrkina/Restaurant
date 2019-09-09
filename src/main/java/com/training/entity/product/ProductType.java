@@ -1,4 +1,4 @@
-package com.epam.training.entity.product;
+package com.training.entity.product;
 
 import lombok.AllArgsConstructor;
 import lombok.ToString;

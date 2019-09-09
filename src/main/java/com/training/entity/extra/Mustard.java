@@ -1,7 +1,7 @@
-package com.epam.training.entity.extra;
+package com.training.entity.extra;
 
-import com.epam.training.entity.Client;
-import com.epam.training.entity.Eatable;
+import com.training.entity.Client;
+import com.training.entity.Eatable;
 
 public class Mustard extends Extra {
 
@@ -10,8 +10,8 @@ public class Mustard extends Extra {
     }
 
     public Double increaseClientsHappiness(Client client) {
-        Double currentHappiness = client.getHappiness();
-        Double extraHappiness = currentHappiness + 1.0;
+        Double initHappiness = client.getHappiness();
+        Double extraHappiness = initHappiness + 1.0;
         client.setHappiness(extraHappiness);
         return extraHappiness;
     }

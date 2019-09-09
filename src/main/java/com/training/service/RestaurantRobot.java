@@ -1,11 +1,11 @@
-package com.epam.training.service;
+package com.training.service;
 
-import com.epam.training.entity.Eatable;
-import com.epam.training.entity.Order;
-import com.epam.training.entity.extra.ExtraType;
-import com.epam.training.entity.product.ProductType;
-import com.epam.training.pattern.DishFactory;
-import com.epam.training.pattern.OrderObserver;
+import com.training.entity.Eatable;
+import com.training.entity.Order;
+import com.training.entity.extra.ExtraType;
+import com.training.entity.product.ProductType;
+import com.training.pattern.DishFactory;
+import com.training.pattern.OrderObserver;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.*;

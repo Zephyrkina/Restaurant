@@ -1,12 +1,12 @@
-package com.epam.training.pattern;
+package com.training.pattern;
 
-import com.epam.training.entity.Eatable;
-import com.epam.training.entity.extra.ExtraType;
-import com.epam.training.entity.product.ProductType;
-import com.epam.training.entity.extra.Ketchup;
-import com.epam.training.entity.extra.Mustard;
-import com.epam.training.entity.product.Chips;
-import com.epam.training.entity.product.Hotdog;
+import com.training.entity.Eatable;
+import com.training.entity.extra.ExtraType;
+import com.training.entity.product.ProductType;
+import com.training.entity.extra.Ketchup;
+import com.training.entity.extra.Mustard;
+import com.training.entity.product.Chips;
+import com.training.entity.product.Hotdog;
 
 
 public class DishFactory{
